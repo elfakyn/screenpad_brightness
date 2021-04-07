@@ -28,7 +28,6 @@ The "8" represents the fact that the command you want to send will be 8 bytes (4
 
 The next 2 values are a command ID and a parameter value. See below for a list.
 
-
 ### Command IDs and parameters
 
 This is a list of Command IDs I found by reverse engineering ASUSLibraService.exe. I have an idea of what they might do but I'm not sure.
@@ -52,6 +51,6 @@ It may be possible to control other ASUS parameters too (I'm thinking turning th
 
 If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `\\.\ATKACPI`, you'll find the function pretty quickly.
 
-## References and useful links
+### References and useful links
 
 The ScreenPad Pro control scheme is eerily similar to Aura Sync. ASUS has an official [Aura SDK](https://www.ASUS.com/campaign/aura/us/AURA-ready.php) and OpenRGB [already has functionality to control the ATKACPI device driver, but for RGB purposes](https://gitlab.com/CalcProgrammer1/OpenRGB).

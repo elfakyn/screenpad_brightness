@@ -39,16 +39,12 @@ Command ID | What the command ID does | What the command parameter does
 0x50035 | Lid close action | ???
 0x100052 | ??? | ???
 
-To my knowledge there is not a mechanism to obtain the brigh
+To my knowledge there is not a mechanism to obtain the current brightness value, which I imagine is why the first time you launch the ASUS Libra Service (control software), it resets the brightness.
 
-### Example
+### Other Development
 
-For example, if you want to set brigthness to value 0x44, the command you want to send is `0x0000004400050032`
+If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `"\\\\.\\ATKACPI"`, you'll find the function pretty quickly.
 
-## Magic numbers
+## References and useful links
 
-The ASUSLibraService binary uses a few magic numbers
-
-## References
-
-The ScreenPad Pro control scheme is eerily similar to Aura Sync. ASUS has an official [Aura SDK](https://www.ASUS.com/campaign/aura/us/AURA-ready.php) and OpenRGB [already has functionality to control that exact device driver](https://gitlab.com/CalcProgrammer1/OpenRGB).
+The ScreenPad Pro control scheme is eerily similar to Aura Sync. ASUS has an official [Aura SDK](https://www.ASUS.com/campaign/aura/us/AURA-ready.php) and OpenRGB [already has functionality to control the ATKACPI device driver, but for RGB purposes](https://gitlab.com/CalcProgrammer1/OpenRGB).

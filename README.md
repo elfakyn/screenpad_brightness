@@ -1,8 +1,10 @@
 # Set the ASUS ScreenPad Brightness via the command line
 
-Brightness Controller for ASUS ScreenPad Pro. This has been tested and works with the ASUS ZenBook Pro Duo UX851
+Brightness Controller for ASUS ScreenPad Pro. This has been tested and works with the ASUS ZenBook Pro Duo UX851.
 
 This program allows you to set the ScreenPad Pro brightness in Windows without the massive bloatware that is ScreenXpert.
+
+Requires Python 3 on Windows.
 
 Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness).
 
@@ -42,11 +44,11 @@ For example, to set the brigthness to maximum (0xFF), you want to send: `[0x5356
 
 ### Limitations and further research
 
-I tried to emulate the relevant parts of the ASUS driver (which is pretty janky...) as closely as possible, which is why the conditional statements and logic flow in the script are clunky.
+There is little error handling if there are problems communicating with the driver.
 
 To my knowledge there is not a mechanism to obtain the current brightness value, which I imagine is why the first time you launch the ASUS Libra Service (control software), it resets the brightness.
 
-It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet. Maybe someone can build a neat GUI on top of it, or maybe I will.
+It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet.
 
 If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `"\\\\.\\ATKACPI"`, you'll find the function pretty quickly.
 

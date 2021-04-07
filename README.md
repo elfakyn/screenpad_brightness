@@ -4,9 +4,9 @@ Brightness Controller for ASUS ScreenPad Pro. This has been tested and works wit
 
 This program allows you to set the ScreenPad Pro brightness in Windows without the massive bloatware that is ScreenXpert.
 
-Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness)
+Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness).
 
-It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.).
+It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet. Maybe someone can build a neat GUI on top of it, or maybe I will.
 
 ## Technical explanation
 
@@ -35,7 +35,7 @@ This is a list of Command IDs I found by reverse engineering ASUSLibraService.ex
 Command ID | What the command ID does | What the command parameter does
 --- | ---
 0x50031 | Touchscreen state | ???
-0x50032 | Set brightness | New brightness value, between 0x00 and 0xFF
+0x50032 | Set brightness | New brightness value, between 0x00 and 0xFF (bigger values wrap around).
 0x50035 | Lid close action | ???
 0x100052 | ??? | ???
 

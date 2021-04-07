@@ -18,7 +18,7 @@ The `execute_device_command` function is a wrapper around the driver controller 
 
 ### Magic buffer to control the device
 
-The magic buffer you want is an array of 4 DWORDS (that is, 0x10 bytes) and has the contents: `[0x53564544, 8, Command ID, Command Parameter]`. This needs to be packed into a little-endian byte array; each value uses 4 bytes.
+The magic buffer you want is an array of 4 DWORDS (that is, 0x10 bytes) and has the contents: `[0x53564544, 8, Command ID, Command Parameter]`. x64 is little-endian, so if your command ID is 0xdeadbeef and your parameter is 0xcacad0d0 then it will look like this in memory: (smaller addresses) `44 45 56 53 08 00 00 00 EF BE AD DE D0 D0 CA CA` (bigger addresses).
 
 0x53564544 is the string "DEVS" (go figure).
 

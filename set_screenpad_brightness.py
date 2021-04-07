@@ -21,6 +21,9 @@ DEVICE_HANDLE = None
 DEVICE_CONTROL_CODE = ctypes.wintypes.DWORD(0x22240c)
 DEVICE_LPOVERLAPPED = None
 
+ERROR_INVALID_BRIGHTNESS_VALUE = "The brightness must be a number between 0 (backlight off) and 255 (maximum brightness)."
+ERROR_MISSING_BRIGHTNESS_PARAMETER = "Please provide a brightness between 0 and 255. For example: python set_screenpad_brightness.py 200"
+
 def change_brightness(brightness_value):
     execute_device_command(COMMAND_SET_BRIGHTNESS, brightness_value)
 
@@ -68,7 +71,16 @@ def execute_device_command(command_id, command_parameter):
             driver_handle = None
 
 if __name__ == "__main__":
-    if len(sys.argv) < 2:
-        print("Please provide a value between 0 and 255.")
+    try:
+        new_brightness = int(sys.argv[1])
+        if new_brightness < 0 or new_brightness > 255:
+            raise ValueError('Brightness out of bounds')
 
-    change_brightness(int(sys.argv[1]))
+        change_brightness(new_brightness)
+
+    except ValueError:
+        print(ERROR_INVALID_BRIGHTNESS_VALUE)
+        exit(1)
+    except IndexError:
+        print(ERROR_MISSING_BRIGHTNESS_PARAMETER)
+        exit(1)

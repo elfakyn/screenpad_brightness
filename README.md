@@ -42,6 +42,8 @@ For example, to set the brigthness to maximum (0xFF), you want to send: `[0x5356
 
 ### Limitations and further research
 
+I tried to emulate the relevant parts of the ASUS driver (which is pretty janky...) as closely as possible, which is why the conditional statements and logic flow in the script are clunky.
+
 To my knowledge there is not a mechanism to obtain the current brightness value, which I imagine is why the first time you launch the ASUS Libra Service (control software), it resets the brightness.
 
 It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet. Maybe someone can build a neat GUI on top of it, or maybe I will.

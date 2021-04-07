@@ -50,8 +50,8 @@ def execute_device_command(command_id, command_parameter):
                 command_parameter
             )
 
-            device_input_buffer = ctypes.create_string_buffer(command)
-            device_output_buffer = ctypes.create_string_buffer(b'\x00' * OUTPUT_BUFFER_SIZE)
+            device_input_buffer = ctypes.create_string_buffer(command, INPUT_BUFFER_SIZE)
+            device_output_buffer = ctypes.create_string_buffer(OUTPUT_BUFFER_SIZE)
 
             num_returned_bytes = ctypes.wintypes.LPDWORD()
 
@@ -66,7 +66,7 @@ def execute_device_command(command_id, command_parameter):
                 DEVICE_LPOVERLAPPED
             )
 
-        if driver_handle == ctypes.wintypes.DWORD(0xf):
+        if driver_handle != ctypes.wintypes.DWORD(0xf):
             kernel32.CloseHandle(driver_handle)
             driver_handle = None
 

@@ -8,6 +8,8 @@ Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (bac
 
 It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet. Maybe someone can build a neat GUI on top of it, or maybe I will.
 
+THIS IS x64 ONLY!!
+
 ## Technical explanation
 
 ASUS uses the ATKACPI driver to control various devices, including the ScreenPad Pro. These controls, such as the ScreenPad brightness, don't show up in Windows natively.
@@ -15,8 +17,6 @@ ASUS uses the ATKACPI driver to control various devices, including the ScreenPad
 By opening a handle to `\\.\ATKACPI` using CreateFileW, the device can be controlled.
 
 The `execute_device_command` function is a wrapper around the driver controller functionality. In order to control the device, you need to send it a specially prepared DWORD buffer.
-
-THIS IS x64 ONLY!!
 
 ### Magic buffer to control the device
 

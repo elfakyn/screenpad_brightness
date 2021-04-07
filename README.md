@@ -38,7 +38,7 @@ Command ID | What the command ID does | What the command parameter does
 0x50035 | Lid close action? | ???
 0x100052 | ??? | ???
 
-For example, to set the brigthness to maximum (0xFF), you want to send: `[0x53564544, 8, 0x50032, 0xFF]`. Which is: `DEVS\x08\x00\x00\x002\x00\x05\x00\xff\x00\x00\x00\x00`
+For example, to set the brigthness to maximum (0xFF), you want to send: `[0x53564544, 8, 0x50032, 0xFF]`. Which is: `DEVS\x08\x00\x00\x002\x00\x05\x00\xff\x00\x00\x00`
 
 ### Limitations and further research
 

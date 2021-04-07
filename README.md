@@ -50,7 +50,7 @@ To my knowledge there is not a mechanism to obtain the current brightness value,
 
 It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet.
 
-If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `"\\\\.\\ATKACPI"`, you'll find the function pretty quickly.
+If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `\\.\ATKACPI`, you'll find the function pretty quickly.
 
 ## References and useful links
 

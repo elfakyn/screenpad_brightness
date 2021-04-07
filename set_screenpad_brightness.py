@@ -63,14 +63,12 @@ def execute_device_command(command_id, command_parameter):
                 DEVICE_LPOVERLAPPED
             )
 
-            #print(device_output_buffer.raw)
-
         if driver_handle == ctypes.wintypes.DWORD(0xf):
             kernel32.CloseHandle(driver_handle)
             driver_handle = None
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
-        print("Provide a value")
+        print("Please provide a value between 0 and 255.")
 
     change_brightness(int(sys.argv[1]))

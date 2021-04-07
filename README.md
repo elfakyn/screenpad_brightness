@@ -32,7 +32,7 @@ The next 2 values are a command ID and a parameter value. See below for a list.
 This is a list of Command IDs I found by reverse engineering ASUSLibraService.exe. I have an idea of what they might do but I'm not sure.
 
 Command ID | What the command ID does | What the command parameter does
---- | ---
+--- | --- | ---
 0x50031 | Touchscreen state? | ???
 0x50032 | Set brightness | New brightness value, between 0x00 and 0xFF (bigger values wrap around).
 0x50035 | Lid close action? | ???

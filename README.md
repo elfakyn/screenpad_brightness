@@ -1,4 +1,4 @@
-# screenpadpro_brightness
+# Set the ASUS ScreenPad Brightness via the command line
 
 Brightness Controller for ASUS ScreenPad Pro. This has been tested and works with the ASUS ZenBook Pro Duo UX851
 

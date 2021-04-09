@@ -10,10 +10,8 @@ Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (bac
 
 For example:
 
-* To set brightness to max: python .\set_screenpad_brightness.py 255
-* To set the brightness to low: python .\set_screenpad_brightness.py 69
-* To set the brightness to zero: python .\set_screenpad_brightness.py 0
-* To turn off the ScreenPad: python .\set_screenpad_brightness.py -1
+* To set the brightness to low: `python .\set_screenpad_brightness.py 69`
+* To turn off the ScreenPad: `python .\set_screenpad_brightness.py -1`
 * To turn it back on, set some non-zero brightness
 
 THIS IS 64 BIT ONLY!!

@@ -1,8 +1,10 @@
 # Set the ASUS ScreenPad Brightness via the command line
 
-Brightness Controller for ASUS ScreenPad Pro. This has been tested and works with the ASUS ZenBook Pro Duo UX851
+Brightness Controller for ASUS ScreenPad Pro. This has been tested and works with the ASUS ZenBook Pro Duo UX851.
 
 This program allows you to set the ScreenPad Pro brightness in Windows without the massive bloatware that is ScreenXpert.
+
+Requires Python 3 on Windows.
 
 Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness). Or set the value to -1 to turn the ScreenPad off. A non-zero value will turn it back on.
 
@@ -34,7 +36,6 @@ The "8" represents the fact that the command you want to send will be 8 bytes (4
 
 The next 2 values are a command ID and a parameter value. See below for a list.
 
-
 ### Command IDs and parameters
 
 This is a list of Command IDs I found by reverse engineering ASUSLibraService.exe. I have an idea of what they might do but I'm not sure.
@@ -50,14 +51,14 @@ For example, to set the brigthness to maximum (0xFF), you want to send: `[0x5356
 
 ### Limitations and further research
 
-I tried to emulate the relevant parts of the ASUS driver (which is pretty janky...) as closely as possible, which is why the conditional statements and logic flow in the script are clunky.
+There is little error handling if there are problems communicating with the driver.
 
 To my knowledge there is not a mechanism to obtain the current brightness value, which I imagine is why the first time you launch the ASUS Libra Service (control software), it resets the brightness.
 
-It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet. Maybe someone can build a neat GUI on top of it, or maybe I will.
+It may be possible to control other ASUS parameters too (I'm thinking turning the screenpad on and off, control the fans etc.), but I haven't looked into it yet.
 
-If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `"\\\\.\\ATKACPI"`, you'll find the function pretty quickly.
+If you want to take a look at it yourself, decompile AsusLibraService.exe and search for the string `Backlight` or `\\.\ATKACPI`, you'll find the function pretty quickly.
 
-## References and useful links
+### References and useful links
 
 The ScreenPad Pro control scheme is eerily similar to Aura Sync. ASUS has an official [Aura SDK](https://www.ASUS.com/campaign/aura/us/AURA-ready.php) and OpenRGB [already has functionality to control the ATKACPI device driver, but for RGB purposes](https://gitlab.com/CalcProgrammer1/OpenRGB).

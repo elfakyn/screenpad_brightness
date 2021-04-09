@@ -4,7 +4,15 @@ Brightness Controller for ASUS ScreenPad Pro. This has been tested and works wit
 
 This program allows you to set the ScreenPad Pro brightness in Windows without the massive bloatware that is ScreenXpert.
 
-Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness).
+Run `python .\set_screenpad_brigthness.py <VALUE>` where VALUE is between 0 (backlight off) and 255 (maximum brigthness). Or set the value to -1 to turn the ScreenPad off. A non-zero value will turn it back on.
+
+For example:
+
+* To set brightness to max: python .\set_screenpad_brightness.py 255
+* To set the brightness to low: python .\set_screenpad_brightness.py 69
+* To set the brightness to zero: python .\set_screenpad_brightness.py 0
+* To turn off the ScreenPad: python .\set_screenpad_brightness.py -1
+* To turn it back on, set some non-zero brightness
 
 THIS IS 64 BIT ONLY!!
 
@@ -33,9 +41,9 @@ This is a list of Command IDs I found by reverse engineering ASUSLibraService.ex
 
 Command ID | What the command ID does | What the command parameter does
 --- | --- | ---
-0x50031 | Touchscreen state? | ???
-0x50032 | Set brightness | New brightness value, between 0x00 and 0xFF (bigger values wrap around).
-0x50035 | Lid close action? | ???
+0x50031 | Turn screenpad off | ??? It seems that any value will turn it off
+0x50032 | Set brightness | New brightness value, between 0x00 and 0xFF. Only the least significant byte matters. If the ScreenPad is off and the value is greater than 0, the ScreenPad will turn on.
+0x50035 | Lid close action??? | ???
 0x100052 | ??? | ???
 
 For example, to set the brigthness to maximum (0xFF), you want to send: `[0x53564544, 8, 0x50032, 0xFF]`. Which is: `DEVS\x08\x00\x00\x002\x00\x05\x00\xff\x00\x00\x00`

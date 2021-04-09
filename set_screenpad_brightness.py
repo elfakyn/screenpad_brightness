@@ -14,6 +14,10 @@ COMMAND_ASUS_CONTROL = 0x53564544
 COMMAND_LENGTH = 8
 
 COMMAND_SET_BRIGHTNESS = 0x50032
+COMMAND_TURN_OFF = 0x50031
+COMMAND_TURN_OFF_PARAMETER = 0
+
+BRIGHTNESS_OFF = -1
 BRIGHTNESS_MIN = 0
 BRIGHTNESS_MAX = 255
 
@@ -34,16 +38,15 @@ DEVICE_LPOVERLAPPED = None
 ARGUMENT_POSITION_BRIGHTNESS = 1
 
 EXCEPTION_BRIGHTNESS_OOB = 'Brightness out of bounds'
-ERROR_INVALID_BRIGHTNESS_VALUE = 'The brightness must be a number between 0 (backlight off) and 255 (maximum brightness).'
-ERROR_MISSING_BRIGHTNESS_PARAMETER = 'Please provide a brightness between 0 and 255. For example: python set_screenpad_brightness.py 200'
+ERROR_INVALID_BRIGHTNESS_VALUE = 'The brightness must be a number between 0 (backlight off) and 255 (maximum brightness). Or choose -1 to turn off the ScreenPad.'
+ERROR_MISSING_BRIGHTNESS_PARAMETER = 'Please provide a brightness between 0 and 255, or choose -1 to turn off the ScreenPad. For example: python set_screenpad_brightness.py 200'
+MESSAGE_TURN_OFF = 'Turning ScreenPad off. To turn it back on, provide a non-zero brightness value.'
 ERROR_BAD_HANDLE = 'Error! Cannot connect to the ASUS ScreenPad Driver.'
 
 EXIT_OK = 0
 EXIT_USAGE = 1
 EXIT_BAD_HANDLE = 2
 
-def change_brightness(brightness_value):
-    execute_device_command(COMMAND_SET_BRIGHTNESS, brightness_value)
 
 def execute_device_command(command_id, command_parameter):
     kernel32 = ctypes.WinDLL(KERNEL_32)
@@ -61,7 +64,7 @@ def execute_device_command(command_id, command_parameter):
     if driver_handle == HANDLE_INVALID or driver_handle == HANDLE_NONE:
         print(ERROR_BAD_HANDLE)
         exit(EXIT_BAD_HANDLE)
-    
+
     command = struct.pack(
         COMMAND_STRUCTURE,
         COMMAND_ASUS_CONTROL,
@@ -91,10 +94,16 @@ def execute_device_command(command_id, command_parameter):
 if __name__ == "__main__":
     try:
         new_brightness = int(sys.argv[ARGUMENT_POSITION_BRIGHTNESS])
-        if new_brightness < BRIGHTNESS_MIN or new_brightness > BRIGHTNESS_MAX:
-            raise ValueError(EXCEPTION_BRIGHTNESS_OOB)
 
-        change_brightness(new_brightness)
+        if new_brightness == BRIGHTNESS_OFF:
+            execute_device_command(COMMAND_TURN_OFF, COMMAND_TURN_OFF_PARAMETER)
+            print(MESSAGE_TURN_OFF)
+            exit(EXIT_OK)
+        if new_brightness >= BRIGHTNESS_MIN and new_brightness <= BRIGHTNESS_MAX:
+            execute_device_command(COMMAND_SET_BRIGHTNESS, new_brightness)
+            exit(EXIT_OK)
+
+        raise ValueError(EXCEPTION_BRIGHTNESS_OOB)
 
     except ValueError:
         print(ERROR_INVALID_BRIGHTNESS_VALUE)
@@ -102,5 +111,5 @@ if __name__ == "__main__":
     except IndexError:
         print(ERROR_MISSING_BRIGHTNESS_PARAMETER)
         exit(EXIT_USAGE)
-        
+
     exit(EXIT_OK)
